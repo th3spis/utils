@@ -1,0 +1,15 @@
+#source https://www.folkstalk.com/2013/03/sed-remove-lines-file-unix-examples.html
+# source https://www.geeksforgeeks.org/sed-command-linux-set-2/
+
+# adding -i in sed we can edit in place and rewrite
+
+
+#Print lines 5 to 8, and 10 from "file" 
+sed -n -e 5,8p -e 10p file
+
+#   $ in sed refers to last line
+#   d is to remove from print (not from file)
+#   sperate with , for a range
+
+sed '$d' file
+sed '5,8d' file
