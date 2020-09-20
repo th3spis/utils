@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+#source: https://stackoverflow.com/questions/6136022/script-to-get-the-http-status-code-of-a-list-of-urls (user: Phil, user: estani)
 #    -o /dev/null throws away the usual output
 #    --silent throws away the progress meter
 #    --head makes a HEAD HTTP request, instead of GET
@@ -11,3 +11,9 @@
 while read LINE; do
   curl -o /dev/null --silent --head --write-out "%{http_code} $LINE\n" "$LINE"
 done < url-list.txt
+
+
+# To extend, we could do it adding parallelism 
+# xargs -n1 -P 10 curl -o /dev/null --silent --head --write-out '%{url_effective}: %{http_code}\n' < url.lst
+# Example saving specific oputput in csv 
+#xargs -n1 -P 10 curl -o /dev/null --silent --head --write-out '%{url_effective};%{http_code};%{time_total};%{time_namelookup};%{time_connect};%{size_download};%{speed_download}\n' < url.lst | tee results.csv
