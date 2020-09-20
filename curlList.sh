@@ -17,3 +17,5 @@ done < url-list.txt
 # xargs -n1 -P 10 curl -o /dev/null --silent --head --write-out '%{url_effective}: %{http_code}\n' < url.lst
 # Example saving specific oputput in csv 
 #xargs -n1 -P 10 curl -o /dev/null --silent --head --write-out '%{url_effective};%{http_code};%{time_total};%{time_namelookup};%{time_connect};%{size_download};%{speed_download}\n' < url.lst | tee results.csv
+#   -n1: use just one value (from the list) as argument to the curl call
+#   -P10: Keep 10 curl processes alive at any time (i.e. 10 parallel connections)
