@@ -1,0 +1,4 @@
+
+#Prtin lines 5 to 8, and 10 from "file" 
+
+sed -n -e 5,8p -e 10p file
