@@ -3,6 +3,10 @@
 #removes results file if it already exists
 rm results_commonStrings.txt
 
+#It would be convinient to remove spaces from filenames, otherwise it could break the script
+#FOO=' test test test '
+# FOO_NO_SPACES="$(echo -e "${FOO}" | sed -e 's/^[[:space:]]*//')"
+
 #take every file in current folder and output its strings in separate files inside tmp/
 for i in *; do
 	name="strings_$i.txt"
