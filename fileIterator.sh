@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+#Do something with every file ($REPLY) in current dir and subdirs
 
 while IFS= read -r -d '' -u 9
 do
