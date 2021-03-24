@@ -1,6 +1,8 @@
 #!/bin/bash
 
 #usage ipchecker.sh /path/file.txt
+#outputs stuff only if bad rep found
+
 
 while read line
 do
