@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#usage ipchecker.sh /path/file.txt
+
 while read line
 do
 	url=https://www.abuseipdb.com/check/$line
