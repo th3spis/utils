@@ -8,7 +8,7 @@
 
 
 if [ "$1" = "-rep" ]  ; then
-	echo "Comprobando la reputación de las IP"
+	echo "Check IP reputation"
 	echo
 	while read line
 	do
@@ -37,7 +37,7 @@ if [ "$1" = "-rep" ]  ; then
 	done<$2
 else
 	if [ "$1" = "-vpn" ] ; then
-		echo "Comprobando si la IP está asociada a alguna empresa de hosting"
+		echo "Check for hosting assotiations for IP"
 		echo
 		while read line
 		do
@@ -52,7 +52,7 @@ else
 				echo $(echo "$checko" | grep -v "owned")
 			else
 				echo "$line:"
-				echo "No association for $line in spur.us. Possible FP."
+				echo -e "\tNo association for $line in spur.us. Possible FP."
 				echo
 			fi
 		done<$2
