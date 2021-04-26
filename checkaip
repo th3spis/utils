@@ -44,8 +44,16 @@ else
 			url=https://spur.us/context/$line
 			match1=$(curl --silent $url | grep -o -E ".*anonymization network" | sed -e 's/<[^>]*>//g' )
 			if [ ${#match1} -gt 1 ] ; then
+				checko=$(curl --silent $url | grep -A 2 -E "This IP is owned by .*")
+				isp=$(grep -o -E "This IP is owned by .*" <<< "$checko" ) 
 				echo "$line:"
-				echo "$match1"
+				echo -n "$match1. "  
+				echo -n "$isp "
+				echo $(echo "$checko" | grep -v "owned")
+			else
+				echo "$line:"
+				echo "No association for $line in spur.us. Possible FP."
+				echo
 			fi
 		done<$2
 	else
