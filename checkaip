@@ -1,0 +1,56 @@
+#!/bin/bash
+
+#Comprobar información sobre IP
+#	-rep: comprobar reputación en abuseipdb
+#	-vpn: comprobar si está asociada a VPN/VPS/Proxy en spur.us
+# usage:
+#		checkaip -rep my_IPlist.txt
+
+
+if [ "$1" = "-rep" ]  ; then
+	echo "Comprobando la reputación de las IP"
+	echo
+	while read line
+	do
+		url=https://www.abuseipdb.com/check/$line
+		#curl writes the output to stderr, so redirect that and also suppress the progress to grep the html
+		#sed cleans html tags
+		#curl --silent  $url 2>&1 | grep "was first reported on" | sed -e 's/<[^>]*>//g'
+		
+		match1=$(curl --silent $url | grep "This IP was reported" | sed -e 's/<[^>]*>//g' )
+		#Check the 
+		if [ ${#match1} -gt 1 ] ; then
+			#He tenido que separar las siguientes dos queries porque se hacían de forma asíncrona automáticamente
+			#ineficiente de cojones 3 peticiones lo sé, pero tengo prisa
+			match2=$(curl --silent $url | grep "distinct source" | sed -e 's/<[^>]*>//g' )
+			match3=$(curl --silent $url | grep -E "first reported|most recently reported" | sed -e 's/<[^>]*>//g' )
+			echo "$line:"
+			echo "$match1"
+			echo "$match2"
+			echo "$match3"
+			echo
+		else
+			echo "$line:"
+			echo "No bad reputation for $line in abuseipdb. Possible FP."
+			echo
+		fi
+	done<$2
+else
+	if [ "$1" = "-vpn" ] ; then
+		echo "Comprobando si la IP está asociada a alguna empresa de hosting"
+		echo
+		while read line
+		do
+			url=https://spur.us/context/$line
+			match1=$(curl --silent $url | grep -o -E ".*anonymization network" | sed -e 's/<[^>]*>//g' )
+			if [ ${#match1} -gt 1 ] ; then
+				echo "$line:"
+				echo "$match1"
+			fi
+		done<$2
+	else
+		echo
+		echo "Usage: checkaip [-vpn/-rep] my_IPlist.txt"
+		echo
+	fi
+fi
