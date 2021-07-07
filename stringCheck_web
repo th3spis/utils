@@ -1,0 +1,39 @@
+#!/bin/bash
+
+#Checks every 48 secs if a string shows up in a website. It beeps when the strings shows up.
+#Perfecto as an alarm when I'm waiting for something to be posted/published on a specific website.
+
+url=https://www.url.com
+check=$(curl --silent $url)
+
+string_to_check=jelou
+
+echo $( echo "$check" | grep "$jelou" )
+
+	while :
+	do
+		echo
+		check2=$(curl --silent $url | grep "string_to_check" )
+
+		if [ ${#check2} -gt 1 ] ; then
+			echo "===================================================="
+			echo
+			echo "=======     YASTAAAAAAAAAAAAAAAAAAAAAAAA      ======"
+			echo
+			echo "===================================================="
+			while :
+			do	
+				echo -ne '\007\007'
+				sleep 1
+			done
+		else
+			clear
+			echo "===================================================="
+			echo
+			echo "==  Not updated. Pero ya queda menosssssssssssss  =="
+			echo
+			echo "===================================================="
+			sleep 48
+		fi
+		echo
+	done
