@@ -1,5 +1,3 @@
-Windows 10 default environment variables
-
 =============
 === RUTAS ===
 =============
@@ -19,18 +17,17 @@ Windows 10 default environment variables
 %SystemRoot%	 --------> 	C:\Windows
 %WINDIR%		 --------> 	C:\Windows
 %PUBLIC%		 --------> 	C:\Users\Public
-%OneDrive%	 	 --------> 	C:\Users\{username}\OneDrive
 %DriverData%	 --------> 	C:\Windows\System32\Drivers\DriverData
 
-=== User specific routes
+=== User specific
 
 %APPDATA%	 	 --------> 	C:\Users\{username}\AppData\Roaming
 %HOMEPATH%	 	 --------> 	C:\Users\{username}
 %LOCALAPPDATA%	 --------> 	C:\Users\{username}\AppData\Local
+%OneDrive%	 	 --------> 	C:\Users\{username}\OneDrive
 %TEMP%			 --------> 	C:\Users\{username}\AppData\Local\Temp
 %TMP%			 --------> 	C:\Users\{username}\AppData\Local\Temp
 %USERPROFILE%	 --------> 	C:\Users\{username}
-
 
 ===============
 ==== OTROS ====
